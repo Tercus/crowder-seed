@@ -1,0 +1,25 @@
+{
+  "name": "crowder-seed",
+  "version": "1.0.0",
+  "description": "crowder-seed takes care of the seeding of files",
+  "main": "seed.js",
+  "dependencies": {
+    "hapi": "^13.3.0",
+    "webtorrent-hybrid": "^1.0.2",
+    "xvfb": "^0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tercus/crowder-seed.git"
+  },
+  "author": "Tercus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tercus/crowder-seed/issues"
+  },
+  "homepage": "https://github.com/Tercus/crowder-seed#readme"
+}
