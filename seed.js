@@ -26,7 +26,7 @@ hserver.route({
 
 hserver.route({
   method: 'POST',
-  path: '/download/{torrent}',
+  path: '/{torrent}',
   handler: function (request, reply) {
       //Start downloading the file
       reply('Hello!' + encodeURIComponent(request.params.torrent))
