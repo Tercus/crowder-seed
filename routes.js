@@ -9,7 +9,7 @@ module.exports = {
       }
     })
     server.route({
-      method: 'GET',
+      method: 'POST',
       path: '/{torrent}',
       handler: require('./download.js').load
     })
