@@ -1,8 +1,5 @@
 'use strict';
-const hapi = require('hapi')
-const server = new hapi.Server()
 const fs = require('fs')
-const routes = require('./routes.js')
 
 //Catch electron output in virtual screen
 var Xvfb = require('xvfb')
@@ -13,25 +10,7 @@ xvfb.startSync()
 const WebTorrent = require('webtorrent-hybrid')
 var client = new WebTorrent()
 
-//Initialize hapi-server and set port
-server.connection({ port: 8081 })
 
-//Initialize routes
-routes.init(server, client)
-
-//Start hapi-server or throw error on failure
-server.start((err) => {
-    if (err) throw err
-    console.log('Server running at:', server.info.uri)
-})
-
-
-var socket = require('socket.io-client')('http://localhost:82')
-socket.on('connect', function(socket){
-  console.log('Connection: ' + socket)
-})
-socket.on('event', function(data){})
-socket.on('disconnect', function(){})
 
  /* Future code to start seeding files. Maybe it is enough to just run through all the folders instead of also checking the DB
 var file = "test.db"
