@@ -4,8 +4,6 @@
   "description": "crowder-seed takes care of the seeding of files",
   "main": "seed.js",
   "dependencies": {
-    "hapi": "^13.3.0",
-    "socket.io-client": "^1.4.5",
     "webtorrent-hybrid": "^1.0.2",
     "xvfb": "^0.2.3"
   },

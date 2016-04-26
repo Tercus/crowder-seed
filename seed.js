@@ -1,5 +1,4 @@
 'use strict';
-const fs = require('fs')
 
 //Catch electron output in virtual screen
 var Xvfb = require('xvfb')
@@ -10,6 +9,7 @@ xvfb.startSync()
 const WebTorrent = require('webtorrent-hybrid')
 var client = new WebTorrent()
 
+console.log('started the server, waiting for torrents')
 
 
  /* Future code to start seeding files. Maybe it is enough to just run through all the folders instead of also checking the DB
