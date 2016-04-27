@@ -8,23 +8,22 @@ xvfb.startSync()
 //darn webtorrent-hybrid needs that window-less mode
 const WebTorrent = require('webtorrent-hybrid')
 var client = new WebTorrent()
-
 console.log('started the server, waiting for torrents')
 
 
- /* Future code to start seeding files. Maybe it is enough to just run through all the folders instead of also checking the DB
-var file = "test.db"
-var db = new sqlite3.Database(file)
-db.serialize(function() {
-  db.run("CREATE TABLE if not exists videos (infoHash TEXT, UID INT, title TEXT, desc TEXT, date INT)")
-  db.each("SELECT infoHash FROM videos", function (err, row) {
-    fs.readdir('./storage/' + row.infoHash + '/', function(err, files){
-      //TODO:
-      // - Fix this. Right now the CPU usage jumps to 100%
-      // - This will be fixed with an update of webtorrent
-      //client.seed('./storage/' + row.infoHash + '/' + files[0], { announceList: [['ws://localhost:8080']] })
+
+var http = require('http')
+var server = http.createServer(handleRequest);
+server.listen(8081, (err) => {  if (err) console.log('Error: ' + err) })
+
+function handleRequest(request, response){
+  if (request.method === 'POST') {
+    console.log(request.url)
+    var infoHash = request.url.substring(1)
+    console.log(infoHash)
+    client.add(infoHash, { path: './storage/' + infoHash + '/', announce: ['ws://localhost:8080'] })
+    client.on('torrent', function () {
+      console.log('new torrent added')
     })
-  })
-})
-db.close()
-*/
+  }
+}
