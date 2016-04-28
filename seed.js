@@ -8,22 +8,21 @@ xvfb.startSync()
 //darn webtorrent-hybrid needs that window-less mode
 const WebTorrent = require('webtorrent-hybrid')
 var client = new WebTorrent()
-console.log('started the server, waiting for torrents')
-
 
 
 var http = require('http')
 var server = http.createServer(handleRequest);
-server.listen(8081, (err) => {  if (err) console.log('Error: ' + err) })
+server.listen(8081, (err) => {
+  if (err) console.log('Error: ' + err)
+  console.log('Seed has started, waiting for torrents')
+})
 
 function handleRequest(request, response){
   if (request.method === 'POST') {
-    console.log(request.url)
     var infoHash = request.url.substring(1)
-    console.log(infoHash)
     client.add(infoHash, { path: './storage/' + infoHash + '/', announce: ['ws://localhost:8080'] })
     client.on('torrent', function () {
-      console.log('new torrent added')
+      console.log('new torrent added' + infoHash)
     })
   }
 }
